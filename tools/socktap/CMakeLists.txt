@@ -30,6 +30,11 @@ add_executable(socktap-cam
     main_cam.cpp
 )
 
+add_executable(fuzzer
+    fuzzer_application.cpp
+    main_fuzzer.cpp
+)
+
 add_executable(socktap-bench-in
     bench_in_application.cpp
     cam_application.cpp
@@ -40,9 +45,11 @@ target_link_libraries(socktap-common PUBLIC Boost::system Boost::program_options
 target_link_libraries(socktap-hello socktap-common)
 target_link_libraries(socktap-cam socktap-common)
 target_link_libraries(socktap-bench-in socktap-common)
+target_link_libraries(fuzzer socktap-common)
 install(TARGETS socktap-hello EXPORT ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(TARGETS socktap-cam EXPORT ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(TARGETS socktap-bench-in EXPORT ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS fuzzer EXPORT ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if(TARGET Cohda::headers)
     target_compile_definitions(socktap-common PUBLIC "SOCKTAP_WITH_COHDA_SDK")
